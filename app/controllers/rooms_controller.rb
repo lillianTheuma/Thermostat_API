@@ -1,12 +1,14 @@
 class RoomsController < ApplicationController
 
   def index
+    @home = Home.find(params[:home_id])
     name = params[:name]
-    @rooms = Room.search(name)
+    @rooms = Home.rooms.search(name)
     json_response(@rooms)
   end
 
   def show
+    @home = Home.find(params[:home_id])
     @room = Room.find(params[:id])
     json_response(@room)
   end

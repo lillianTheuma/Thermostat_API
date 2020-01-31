@@ -37,6 +37,6 @@ class TemperaturesController < ApplicationController
   private
 
   def temperature_params
-    params.permit(:name)
+    params.permit(:temperature)
   end
 end
