@@ -17,6 +17,15 @@ class RoomsController < ApplicationController
     json_response(@temperature)
   end
 
+  def configure_temp_setting
+    @room = Room.find(params[:room_id])
+    if @room.update!(room_params)
+      render status: 200, json: {
+        message: "Temperature setting adjusted."
+      }
+    end
+  end
+
   def ac_on?
     @room = Room.find(params[:room_id])
     @temperature = @room.temperatures.most_recent[0].temperature
@@ -72,6 +81,6 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.permit(:name)
+    params.permit(:name, :temp_setting)
   end
 end
