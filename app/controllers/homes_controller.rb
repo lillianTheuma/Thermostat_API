@@ -17,7 +17,7 @@ class HomesController < ApplicationController
     @temperatures = []
 
     @rooms.each do |current_room|
-      @temperatures.push (current_room.temperatures.most_recent[0].temperature)
+      @temperatures.push(current_room.temperatures.most_recent[0])
     end
     json_response(@temperatures)
   end

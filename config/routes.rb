@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     get '/current_temps' => 'homes#latest_temps_by_home'
     resources :rooms do
       get '/current_temp' => 'rooms#latest_temp_by_room'
-      resource :temperature
+      resource :temperatures
     end
   end
 end

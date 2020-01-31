@@ -10,16 +10,17 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
     json_response(@room)
   end
-  
+
   def latest_temp_by_room
     @home = Home.find(params[:home_id])
     @room = Room.find(params[:room_id])
     @temperature = @room.temperatures.most_recent[0]
-    json_response(@temperature.temperature)
+    json_response(@temperature)
   end
 
   def create
-    @room = Room.create!(room_params)
+    @home = Home.find(params[:home_id])
+    @room = @home.rooms.create!(room_params)
     json_response(@room, 201)
   end
 

@@ -1,8 +1,8 @@
 class TemperaturesController < ApplicationController
 
   def index
-    name = params[:name]
-    @temperatures = Temperature.all
+    @room = Room.find(params[:room_id])
+    @temperatures = @room.temperatures
     json_response(@temperatures)
   end
 
@@ -12,7 +12,8 @@ class TemperaturesController < ApplicationController
   end
 
   def create
-    @temperature = Temperature.create!(temperature_params)
+    @room = Room.find(params[:room_id])
+    @temperature = @room.temperatures.create!(temperature_params)
     json_response(@temperature, 201)
   end
 
