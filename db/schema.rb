@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 4) do
+ActiveRecord::Schema.define(version: 2020_01_31_230236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 4) do
     t.string "name"
     t.integer "home_id"
     t.boolean "active"
+    t.integer "temp_setting"
   end
 
   create_table "temperatures", force: :cascade do |t|
