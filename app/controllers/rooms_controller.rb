@@ -12,10 +12,37 @@ class RoomsController < ApplicationController
   end
 
   def latest_temp_by_room
-    @home = Home.find(params[:home_id])
     @room = Room.find(params[:room_id])
     @temperature = @room.temperatures.most_recent[0]
     json_response(@temperature)
+  end
+
+  def ac_on?
+    @room = Room.find(params[:room_id])
+    @temperature = @room.temperatures.most_recent[0].temperature
+    if @temperature
+      if @temperature > @room.temp_setting
+        json_response(true, 200)
+      else
+        json_response(false, 200)
+      end
+    else
+      json_response(nil, 200)
+    end
+  end
+
+  def heater_on?
+    @room = Room.find(params[:room_id])
+    @temperature = @room.temperatures.most_recent[0].temperature
+    if @temperature
+      if @temperature < @room.temp_setting
+        json_response(true, 200)
+      else
+        json_response(false, 200)
+      end
+    else
+      json_response(nil, 200)
+    end
   end
 
   def create
