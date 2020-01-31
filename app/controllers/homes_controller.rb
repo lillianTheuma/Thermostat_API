@@ -1,14 +1,25 @@
 class HomesController < ApplicationController
 
   def index
-    name = params[:name]
-    @homes = Home.search(name)
+    @homes = Home.all
     json_response(@homes)
   end
 
   def show
     @home = Home.find(params[:id])
     json_response(@home)
+  end
+
+  def latest_temps_by_home
+    puts(params[:id].to_s)
+    @home = Home.find(params[:home_id])
+    @rooms = @home.rooms
+    @temperatures = []
+
+    @rooms.each do |current_room|
+      @temperatures.push (current_room.temperatures.most_recent[0].temperature)
+    end
+    json_response(@temperatures)
   end
 
   def create

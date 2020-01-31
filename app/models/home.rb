@@ -5,4 +5,4 @@ class Home < ApplicationRecord
 
   scope :search_by_name, -> (name) {where("name like ?", "%#{name}%")}
   scope :search_by_address, -> (address) {where("address like ?", "%#{address}%")}
-  end
+end

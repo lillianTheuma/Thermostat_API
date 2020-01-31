@@ -2,7 +2,7 @@ class TemperaturesController < ApplicationController
 
   def index
     name = params[:name]
-    @temperatures = Temperature.search(name)
+    @temperatures = Temperature.all
     json_response(@temperatures)
   end
 
