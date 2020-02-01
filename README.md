@@ -14,21 +14,21 @@ application up and running.
 * System dependencies
   Postgres
   Rails
-* Database creation
+* Setup
+
+A bash file with setup procedures is included
+Contents are as follows:
 ```bash
-  rake db:create
-```
-* Database initialization
-```bash
+bundle install
+rake db:create
 rake db:schema:load
+rake db:seed
+rails s
+
 ```
 * How to run the test suite
 ```bash
 rspec
-```
-* Deployment instructions
-```bash
-rails s
 ```
 
 ## Endpoints
@@ -71,11 +71,26 @@ params:
   - name (string)
   - temp_setting (integer)
 
+### PATCH /homes/[:home_id]/rooms/[:room_id]
+Deletes a room
+
 ### GET /homes/[:home_id]/rooms/[:room_id]/ac_on
 returns a boolean regarding whether the AC should be on or not and current temperature
+Used for automated logic, this endpoint would be called by a smart air conditioner
 
 ### GET /homes/[:home_id]/rooms/[:room_id]/heater_on
 returns a boolean regarding whether the heater should be on or not based on temperature setting and current temperature
+Used for automated logic, this endpoint would be called by a smart heater
+
 
 ### GET /homes/[:home_id]/rooms/[:room_id]/current_temp
 Returns the latest temperature reading in the room as an integer
+Mostly for user interfaces as automated systems will use heater_on and ac_on endpoints
+
+### GET /homes/[:home_id]/rooms/[:room_id]/temperatures_today
+Returns temperature readings taken today
+Mostly for user interfaces, can be used to make a graph of temperatures over time, for example.
+
+### POST /homes/[:home_id]/rooms/[:room_id]/temperatures
+params:
+  - temperature (integer)
