@@ -9,22 +9,73 @@ Instructions on setting up
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-Things you may want to cover:
-
 * Ruby version
-
+  2.6.5
 * System dependencies
-
-* Configuration
-
+  Postgres
+  Rails
 * Database creation
-
+```bash
+  rake db:create
+```
 * Database initialization
-
+```bash
+rake db:schema:load
+```
 * How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
+```bash
+rspec
+```
 * Deployment instructions
+```bash
+rails s
+```
 
-* ...
+## Endpoints
+### GET /homes/
+Returns a list of homes
+### POST /homes/
+params:
+  - name (string)
+  - address (string)
+
+### GET /homes/current_temps
+Returns a list of the temperatures of every room.
+
+### GET /homes/[:home_id]
+Returns stats on a single home
+
+### PATCH /homes/[:home_id]
+Update data on a single home
+params:
+  - name (string)
+  - address (string)
+
+### DELETE /homes/[:home_id]
+Delete a home, and its child objects
+
+### GET /homes/[:home_id]/rooms
+Returns a list of rooms
+
+### POST /homes/[:home_id]/rooms
+params:
+  - name (string)
+  - temp_setting (integer)
+
+### GET /homes/[:home_id]/rooms/[:room_id]
+Returns stats on a single room
+
+### PATCH /homes/[:home_id]/rooms/[:room_id]
+Updates data on a single room
+params:
+  - name (string)
+  - temp_setting (integer)
+
+### GET /homes/[:home_id]/rooms/[:room_id]/ac_on
+returns a boolean regarding whether the AC should be on or not and current temperature
+
+### GET /homes/[:home_id]/rooms/[:room_id]/heater_on
+returns a boolean regarding whether the heater should be on or not based on temperature setting and current temperature
+
+### GET /homes/[:home_id]/rooms/[:room_id]/current_temp
+Returns the latest temperature reading in the room as an integer
