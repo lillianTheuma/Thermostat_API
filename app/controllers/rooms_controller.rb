@@ -61,12 +61,18 @@ class RoomsController < ApplicationController
   end
 
   def update
-    @room = Room.find(params[:id])
+    @room = Room.find(params[:room_id])
     if @room.update!(room_params)
       render status: 200, json: {
         message: "This room has been updated successfully."
       }
     end
+  end
+
+  def temperatures_today
+    @room = Room.find(params[:room_id])
+    @temperatures = @room.temperatures.today
+    json_response(@temperatures, 200)
   end
 
   def destroy

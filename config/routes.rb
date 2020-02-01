@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       patch '/update_setting' => 'rooms#configure_temp_setting'
       get '/current_temp' => 'rooms#latest_temp_by_room'
       get '/temperatures' => 'rooms#temperatures'
-      get '/temperatures_on_day' => 'rooms#temperatures_on_day'
+      get '/temperatures_today' => 'rooms#temperatures_today'
     end
   end
 end

@@ -7,4 +7,5 @@ class Temperature < ApplicationRecord
   scope :most_recent, -> { order(created_at: :desc).limit(1)}
   scope :above_setting, -> ( setting ) { where("temperature > ?", "#{setting}")}
   scope :below_setting, -> ( setting) { where("temperature < ?", "#{setting}")}
+  scope :today, -> { where("created_at >=?", Time.now.beginning_of_day)}
 end
